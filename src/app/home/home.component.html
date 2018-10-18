@@ -1,0 +1,16 @@
+<div class="container">
+    <div class="row">
+    <div *ngFor="let region of regionNames" class="col-sm-12 col-md-6 col-lg-4">
+    <div class="card" style="width: 18rem;">
+    <img class="card-img-top" src="{{region.image}}" alt="Card image cap">
+    <div class="card-body">
+    <h5 class="card-title">{{region.regionName | uppercase}}</h5>
+    <a [routerLink] ="['/allcountries', region.regionName]" class="btn btn-primary">Explore</a>
+    </div>
+    </div>
+    <br>
+    </div>
+    </div>
+</div>
+
+<ngx-spinner></ngx-spinner>

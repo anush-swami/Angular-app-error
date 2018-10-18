@@ -1,0 +1,65 @@
+<div class = "container">
+
+ <i><h1> Explore this beautiful country..... </h1></i>
+ <br>
+<div *ngIf="currentCountry">
+<div class="card mb-3">
+    <img class="card-img-top" src="assets/Images/BASICDETAILS.png" alt="Card image cap">
+    <div class="card-body">
+      <h2 class="card-title">BASIC DETAILS</h2>
+      <h5 class="card-text">Name - <i>{{currentCountry[0].name}}</i></h5>
+      <h5 class="card-text">Capital - <i>{{currentCountry[0].capital}}</i></h5>
+      <h5 class="card-text">Region - <i>{{currentCountry[0].region}}</i></h5>
+      <h5 class="card-text">Subregion - <i>{{currentCountry[0].subregion}}</i></h5>
+      <h5 class="card-text">Languages - 
+          <a [routerLink] = "['/allcountries/language',language.iso639_1]"  *ngFor='let language of currentCountry[0].languages; let first = first; let last = last;'>{{language.name}}{{last ? '' : ', '}}</a>
+      </h5>
+      <h5 class="card-text">Currencies -
+          <a [routerLink] = "['/allcountries/currency',currency.code]"  *ngFor='let currency of currentCountry[0].currencies; let first = first; let last = last;'>{{currency.name}}{{last ? '' : ', '}} </a>
+      </h5>
+    </div>
+</div>
+
+<br>
+<br>
+
+<div class="card mb-3">
+    <img class="card-img-top" src="assets/Images/COUNTRYCODES.png" alt="Card image cap">
+    <div class="card-body">
+      <h2 class="card-title">COUNTRY CODES</h2>
+      <h5 class="card-text">Alpha 2 code - <i>{{currentCountry[0].alpha2Code}}</i></h5>
+      <h5 class="card-text">Alpha 3 code - <i>{{currentCountry[0].alpha3Code}}</i></h5>
+      <h5 class="card-text">Calling Code - <i>{{currentCountry[0].callingCodes}}</i></h5>
+      <h5 class="card-text">Gini - <i>{{currentCountry[0].gini}}</i></h5>
+      <h5 class="card-text">Numeric Code - <i>{{currentCountry[0].numericCode}}</i></h5>
+    </div>
+</div>
+
+<br>
+
+<div class="card mb-3">
+    <img class="card-img-top" src="assets/Images/GEOGRAPHICAL.png" alt="Card image cap">
+    <div class="card-body">
+      <h2 class="card-title">GEOGRAPHICAL & OTHER DETAILS</h2>
+      <h5 class="card-text">Population - <i>{{currentCountry[0].population}}</i></h5>
+      <h5 class="card-text">Area - <i>{{currentCountry[0].area}}</i></h5>
+      <h5 class="card-text">Native Name - <i>{{currentCountry[0].nativeName}}</i></h5>
+      <h5 class="card-text">Regional Blocks - <i>{{currentCountry[0].regionalBlocs[0].name}}</i></h5>
+      <h5 class="card-text">Borders - 
+      <span *ngFor='let border of currentCountry[0].borders; let first = first; let last = last;'>{{border}}{{last ? '' : ', '}}></span>
+      </h5>
+      
+      
+    </div>
+ </div>
+
+ <button type="button" class="btn btn-primary btn-md" (click)="goBack()">Go Back
+ </button>
+
+</div>
+</div>
+
+<br>
+<br>
+
+<ngx-spinner></ngx-spinner>

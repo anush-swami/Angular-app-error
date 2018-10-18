@@ -1,0 +1,52 @@
+<div class="container">
+
+    <form>
+        <div class="form-group">
+          <label><h3>Search countries by name:</h3></label>
+          <input type="text" [(ngModel)]="term" class="form-control" name="term" placeholder="Enter country name here">
+        </div>
+      </form>
+
+      <br>
+
+      <button type="button" class="btn btn-primary btn-md" (click)="goBack()">Go Back
+      </button>
+
+      <br>
+      <br>
+
+    <div class="row">
+    <div *ngFor="let country of allCountries | filter:term" class="col-sm-12 col-md-6 col-lg-4">
+    <div class="card" style="width: 18rem;">
+      <img class="card-img-top img-fluid" src="{{country.flag}}" alt="Card image cap">
+      <div class="card-body">
+        <h5 class="card-title">{{country.name}}</h5>
+        <p class="card-text">Capital - {{country.capital}}</p>
+        <div class="card-text">
+            <p>Currency : 
+              <span *ngFor="let currency of country.currencies; let i = last">
+              <a [routerLink] = "['/allcountries/currency',currency.code]"> {{currency.name}} </a> {{i ? "" : ","}} </span>
+            </p>
+        </div>
+        <div class="card-text">
+            <p>Language : 
+              <span *ngFor="let language of country.languages; let i = last">
+                  <a [routerLink] = "['/allcountries/language',language.iso639_1]"> {{language.name}} </a> {{i ? "" : ","}} </span>
+            </p>
+        </div>  
+        <button type="button" class="btn btn-primary btn-md"><a [routerLink] = "['/country-view',country.name]"> View Details </a></button>
+      </div>
+    </div>
+    
+    <br>
+    <br>
+    
+    </div>
+    </div>
+    
+    </div>
+
+    <router-outlet></router-outlet>
+    <ngx-spinner></ngx-spinner>
+
+    
