@@ -1,52 +1,63 @@
 <div class="container">
 
-    <form>
-        <div class="form-group">
-          <label><h3>Search countries by name:</h3></label>
-          <input type="text" [(ngModel)]="term" class="form-control" name="term" placeholder="Enter country name here">
-        </div>
-      </form>
+  <form>
+    <div class="form-group">
+      <label><h3>Search countries by name:</h3></label>
+      <input type="text" [(ngModel)]="term" class="form-control" name="term" placeholder="Enter country name here">
+    </div>
+  </form>
 
-      <br>
+  <br>
 
-      <button type="button" class="btn btn-primary btn-md" (click)="goBack()">Go Back
-      </button>
+  <button type="button" class="btn btn-primary btn-md" (click)="goBack()">Go Back
+  </button>
 
-      <br>
-      <br>
+  <br>
+  <br>
 
-    <div class="row">
+  <div class="row">
     <div *ngFor="let country of allCountries | filter:term" class="col-sm-12 col-md-6 col-lg-4">
-    <div class="card" style="width: 18rem;">
-      <img class="card-img-top img-fluid" src="{{country.flag}}" alt="Card image cap">
-      <div class="card-body">
-        <h5 class="card-title">{{country.name}}</h5>
-        <p class="card-text">Capital - {{country.capital}}</p>
-        <div class="card-text">
-            <p>Currency : 
+      <div class="card" style="width: 18rem;">
+        <img class="card-img-top img-fluid" src="{{country.flag}}" alt="Card image cap">
+        <div class="card-body">
+          <h5 class="card-title">{{country.name}}</h5>
+          <p class="card-text">Capital - {{country.capital}}</p>
+          <div class="card-text">
+            <p>Currency :
               <span *ngFor="let currency of country.currencies; let i = last">
-              <a [routerLink] = "['/allcountries/currency',currency.code]"> {{currency.name}} </a> {{i ? "" : ","}} </span>
+                <!--Add a check if Country Code is Null or Not. Router Link throws an error if a parameter passed is 'null'-->
+              <a *ngIf="currency.code"
+                 [routerLink]="['/allcountries/currency',currency.code]">{{currency.name}}</a>
+                <!--In case of 'null', simply show the text and remove the a link-->
+              <span *ngIf="!currency.code">{{currency.name}}</span>
+                <!--Add ',' after currency-->
+                {{i ? "" : ", "}}</span>
             </p>
-        </div>
-        <div class="card-text">
-            <p>Language : 
+          </div>
+          <div class="card-text">
+            <p>Language :
               <span *ngFor="let language of country.languages; let i = last">
-                  <a [routerLink] = "['/allcountries/language',language.iso639_1]"> {{language.name}} </a> {{i ? "" : ","}} </span>
+                <!--Add a check if Language Code is 'null' or Not. Router Link throws an error if a parameter passed is 'null'-->
+                  <a *ngIf="language.iso639_1" [routerLink]="['/allcountries/language',language.iso639_1]">{{language.name}}</a>
+                <!--In case of 'null', simply show the text and remove the a link-->
+                  <span *ngIf="!language.iso639_1">{{language.name}}</span>
+                <!--Add ',' after language-->
+                {{i ? "" : ", "}}</span>
             </p>
-        </div>  
-        <button type="button" class="btn btn-primary btn-md"><a [routerLink] = "['/country-view',country.name]"> View Details </a></button>
+          </div>
+          <button type="button" class="btn btn-primary btn-md"><a [routerLink]="['/country-view',country.name]"> View
+            Details </a></button>
+        </div>
       </div>
-    </div>
-    
-    <br>
-    <br>
-    
-    </div>
-    </div>
-    
-    </div>
 
-    <router-outlet></router-outlet>
-    <ngx-spinner></ngx-spinner>
+      <br>
+      <br>
 
-    
+    </div>
+  </div>
+
+</div>
+
+<!--<router-outlet></router-outlet>-->
+<ngx-spinner></ngx-spinner>
+
